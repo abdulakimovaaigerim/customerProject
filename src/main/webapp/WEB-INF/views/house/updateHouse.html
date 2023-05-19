@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Update Doctor</title>
+</head>
+<body>
+<form th:action="@{/houses/{id}/{id}/update(id=${id},id=${oldHouse.id})}"
+      th:object="${oldHouse}"
+      th:method="POST">
+
+  <div>
+    <label>
+      <input th:field="*{houseType}" placeholder="House Type">
+    </label>
+    <div>
+      <label>
+        <input th:field="*{address}" placeholder="Address">
+      </label>
+    </div>
+    <label>
+      <input th:field="*{price}" placeholder="Price">
+    </label>
+    <label>
+      <input th:field="*{room}" placeholder="Room">
+    </label>
+  </div>
+  <label>
+    <input th:field="*{country}" placeholder="Country">
+  </label>
+  <div>
+    <label>
+      <input th:field="*{description}" placeholder="Description">
+    </label>
+  </div>
+  <label>
+    <input th:field="*{isBooked}" placeholder="IsBooked">
+  </label>
+  <label>
+    <input th:field="*{image}" placeholder="Image">
+  </label>
+  <div>
+    <input type="submit" value="update">
+  </div>
+</form>
+
+</body>
+</html>
