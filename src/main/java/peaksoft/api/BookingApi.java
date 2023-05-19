@@ -1,2 +1,4 @@
-package peaksoft.api;public class BookingApi {
+package peaksoft.api;
+
+public class BookingApi {
 }

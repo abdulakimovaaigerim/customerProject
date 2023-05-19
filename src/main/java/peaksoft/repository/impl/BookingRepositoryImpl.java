@@ -1,19 +1,23 @@
 package peaksoft.repository.impl;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 import peaksoft.entity.Booking;
 import peaksoft.entity.Customer;
 import peaksoft.entity.House;
+import peaksoft.repository.BookingRepository;
 
-@Service
+@Repository
 @Transactional
 @RequiredArgsConstructor
-public class BookingRepository implements peaksoft.repository.BookingRepository {
+public class BookingRepositoryImpl implements BookingRepository {
 
-    private final EntityManager entityManager;
+    @PersistenceContext
+    private EntityManager entityManager;
+
     @Override
     public Booking getBookingById(Long bookingId) {
         return entityManager.find(Booking.class, bookingId);
