@@ -2,47 +2,42 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Update Doctor</title>
+  <title>Update House</title>
 </head>
 <body>
-<form th:action="@{/houses/{id}/{id}/update(id=${id},id=${oldHouse.id})}"
-      th:object="${oldHouse}"
-      th:method="POST">
 
-  <div>
-    <label>
-      <input th:field="*{houseType}" placeholder="House Type">
-    </label>
-    <div>
-      <label>
-        <input th:field="*{address}" placeholder="Address">
-      </label>
-    </div>
-    <label>
-      <input th:field="*{price}" placeholder="Price">
-    </label>
-    <label>
-      <input th:field="*{room}" placeholder="Room">
-    </label>
-  </div>
-  <label>
-    <input th:field="*{country}" placeholder="Country">
-  </label>
-  <div>
-    <label>
-      <input th:field="*{description}" placeholder="Description">
-    </label>
-  </div>
-  <label>
-    <input th:field="*{isBooked}" placeholder="IsBooked">
-  </label>
-  <label>
-    <input th:field="*{image}" placeholder="Image">
-  </label>
-  <div>
-    <input type="submit" value="update">
+<form th:object="${house}" th:method="POST" th:action="@{/houses/{id}update/{id}(id=${house.id})}">
+  <div class="container">
+    <hr>
+
+    <label for="houseType"><b>Agency name</b></label>
+    <input type="text" placeholder="Enter House Type" th:field="*{houseType}" name="houseType" id="houseType" required>
+
+    <label for="address"><b>Address</b></label>
+    <input type="text" placeholder="Enter Address" th:field="*{address}" name="address" id="address"
+           required>
+
+    <label for="price"><b>Price</b></label>
+    <input type="text" placeholder="Enter Price" th:field="*{price}" name="price" id="price"
+           required>
+
+    <label for="room"><b>Room</b></label>
+    <input type="text" placeholder="Enter Room" th:field="*{room}" name="room" id="room"
+           required>
+
+    <label for="country"><b>Country</b></label>
+    <input type="text" placeholder="Enter country" th:field="*{country}" name="country" id="country"
+           required>
+
+    <label for="image"><b>Image</b></label>
+    <input type="text" placeholder="Enter image" th:field="*{image}" name="image" id="image"
+           required>
+
+    <hr>
+    <button type="submit" class="registered">Update Company</button>
   </div>
 </form>
+
 
 </body>
 </html>

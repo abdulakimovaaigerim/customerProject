@@ -3,19 +3,22 @@ package peaksoft.repository.impl;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import peaksoft.entity.Agency;
 import peaksoft.entity.Customer;
 import peaksoft.repository.CustomerRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 @Transactional
+@RequiredArgsConstructor
 public class CustomerRepositoryImpl implements CustomerRepository {
 
     @PersistenceContext
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     @Override
     public void saveCustomer(Customer customer) {
@@ -37,7 +40,6 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         Customer customer = entityManager.find(Customer.class, id);
         customer.setName(newCustomer.getName());
         customer.setSurname(newCustomer.getSurname());
-        customer.setAge(newCustomer.getAge());
         customer.setEmail(newCustomer.getEmail());
         customer.setDateOfBirth(newCustomer.getDateOfBirth());
         customer.setGender(newCustomer.getGender());
@@ -51,13 +53,15 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     }
 
     @Override
-    public void assignCustomerToAgency(Long customerId, Long agencyId) {
+    public void assignCustomerToAgency(Long customerId, List<Long> agencyIdes) {
         Customer customer = entityManager.find(Customer.class, customerId);
-        Agency agency = entityManager.find(Agency.class, agencyId);
-
-        customer.getAgencies().add(agency);
-        agency.getCustomers().add(customer);
+        List<Agency> agencies = new ArrayList<>();
+        for (Long id : agencyIdes){
+            Agency agency = entityManager.find(Agency.class, id);
+            agencies.add(agency);
+            agency.getCustomers().add(customer);
+        }
+        customer.setAgencies(agencies);
         entityManager.merge(customer);
-
     }
 }

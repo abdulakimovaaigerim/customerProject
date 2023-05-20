@@ -40,7 +40,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void assignCustomerToAgency(Long customerId, Long agencyId) {
-        customerRepository.assignCustomerToAgency(customerId, agencyId);
+    public void assignCustomerToAgency(Long customerId, List<Long> agencyIdes) {
+        customerRepository.assignCustomerToAgency(customerId, agencyIdes);
     }
+
+
 }

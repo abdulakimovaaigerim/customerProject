@@ -8,7 +8,7 @@ import peaksoft.entity.House;
 import peaksoft.service.HouseService;
 
 @Controller
-@RequestMapping("/houses")
+@RequestMapping("/houses/{agencyId}")
 public class HouseApi {
 
     private final HouseService houseService;
@@ -18,43 +18,42 @@ public class HouseApi {
         this.houseService = houseService;
     }
 
-    @GetMapping("/{id}")
-    public String getAllHouses(Model model, @PathVariable Long id){
-        model.addAttribute("allHouses",houseService.getAllHouses(id));
-        return "house/mainPage"+id;
+
+    @GetMapping
+    public String getAllHouses(@PathVariable Long agencyId, Model model){
+        model.addAttribute("houses",houseService.getAllHouses(agencyId));
+        model.addAttribute("agencyId",agencyId);
+        return "/house/mainPage";
     }
 
     @GetMapping("/new")
-    public String createHouse(Model model){
+    public String create(@PathVariable Long agencyId, Model model){
+        model.addAttribute("agencyId",agencyId);
         model.addAttribute("newHouse",new House());
         return "house/newHouse";
-
     }
 
-    @PostMapping("/{id}/save")
-    public String saveHouse(@PathVariable("id") Long id, @ModelAttribute("newHouse") House house){
-        houseService.saveHouse(id, house);
-        return "redirect:/houses"+id;
-
+    @PostMapping("/save")
+    public String save(@PathVariable Long agencyId, @ModelAttribute("newHouse") House house) {
+        houseService.saveHouse(agencyId,house);
+        return "redirect:/houses/" + agencyId;
     }
 
-    @GetMapping("/{id}/edit")
-    public String editHouse(Model model, @PathVariable("id") Long id){
-        model.addAttribute("oldHouse", houseService.getHouseById(id));
-        return "house/updateHouse";
+//    @GetMapping("/{houseId}/edit")
+//    public String edit(@PathVariable Long houseId, Model model, @PathVariable Long agencyId){
+//        model.addAttribute("house",houseService.getHouseById(houseId));
+//        return "house/updateHouse"+agencyId;
+//    }
+//
+//    @PostMapping("{id}/update")
+//    public String updateHouse(@PathVariable Long id, House newHouse, @PathVariable Long agencyId){
+//        houseService.updateHouse(id, newHouse);
+//        return "redirect:houses/"+agencyId;
+//    }
 
-    }
-
-    @PostMapping("/{id}/update")
-    public String updateHouse(@PathVariable("id") Long id, @ModelAttribute("house") House newHouse){
-        houseService.updateHouse(id, newHouse);
-        return "redirect:/houses";
-
-    }
-
-    @DeleteMapping("/delete")
-    public String deleteById(@RequestParam("houseId") Long id){
+    @DeleteMapping("/{houseId}/delete")
+    public String deleteHouse(@PathVariable("houseId") Long id, @PathVariable Long agencyId) {
         houseService.deleteHouseById(id);
-        return "redirect:houses";
+        return "redirect:/houses"+agencyId;
     }
 }

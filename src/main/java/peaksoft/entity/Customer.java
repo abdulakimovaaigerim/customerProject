@@ -7,6 +7,7 @@ import lombok.Setter;
 import peaksoft.enums.Gender;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,7 +30,6 @@ public class Customer {
     private String surname;
 
     //    @NotEmpty(message = "int should not be empty!")
-    private int age;
 
     //  @Column(unique = true)
 //    @NotEmpty(message = "Email should not be empty!")
@@ -47,13 +47,13 @@ public class Customer {
 //    @DateTimeFormat(pattern = "MM/DD/YYYY")
 //    @Future(message = "Date must be future time!")
     private LocalDate dateOfBirth;
+    private String image;
 
 
 
-    public Customer(String name, String surname, int age, String email, Gender gender, String phoneNumber, LocalDate dateOfBirth) {
+    public Customer(String name, String surname,  String email, Gender gender, String phoneNumber, LocalDate dateOfBirth) {
         this.name = name;
         this.surname = surname;
-        this.age = age;
         this.email = email;
         this.gender = gender;
         this.phoneNumber = phoneNumber;
@@ -65,13 +65,13 @@ public class Customer {
             CascadeType.MERGE,
             CascadeType.REFRESH,
             CascadeType.PERSIST})
-    private List<Agency> agencies;
+    private List<Agency> agencies = new ArrayList<>();
 
     @OneToMany(mappedBy = "customer", cascade = {
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.REFRESH,
             CascadeType.PERSIST})
-    private List<Booking> bookings;
+    private List<Booking> bookings = new ArrayList<>();
 
 }

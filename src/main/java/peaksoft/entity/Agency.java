@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -45,13 +46,16 @@ public class Agency {
             CascadeType.MERGE,
             CascadeType.REFRESH,
             CascadeType.PERSIST})
-    private List<Customer> customers;
+    private List<Customer> customers = new ArrayList<>();
 
     @OneToMany(mappedBy = "agency", cascade = {
             CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.REFRESH,
             CascadeType.PERSIST})
-    private List<House> houses;
+    private List<House> houses = new ArrayList<>();
+
+    @OneToMany(mappedBy = "agency", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private List<Booking> bookings = new ArrayList<>();
 
 }

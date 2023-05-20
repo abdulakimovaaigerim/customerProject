@@ -3,6 +3,7 @@ package peaksoft.repository.impl;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import peaksoft.entity.Agency;
 import peaksoft.entity.House;
@@ -12,10 +13,11 @@ import java.util.List;
 
 @Repository
 @Transactional
+@RequiredArgsConstructor
 public class HouseRepositoryImpl implements HouseRepository {
 
     @PersistenceContext
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     @Override
     public void saveHouse(Long agencyId, House house) {

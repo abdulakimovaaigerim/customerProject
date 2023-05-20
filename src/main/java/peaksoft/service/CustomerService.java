@@ -1,6 +1,5 @@
 package peaksoft.service;
 
-import peaksoft.entity.Agency;
 import peaksoft.entity.Customer;
 
 import java.util.List;
@@ -17,5 +16,5 @@ public interface CustomerService {
 
     void deleteCustomerById(Long id);
 
-    void assignCustomerToAgency(Long customerId, Long agencyId);
+    public void assignCustomerToAgency(Long customerId, List<Long> agencyIdes);
 }

@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import peaksoft.enums.HouseType;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -57,7 +59,7 @@ public class House {
             CascadeType.MERGE,
             CascadeType.REFRESH,
             CascadeType.PERSIST})
-    private List<Booking> bookings;
+    private List<Booking> bookings = new ArrayList<>();
 
     @ManyToOne(cascade = {
             CascadeType.DETACH,

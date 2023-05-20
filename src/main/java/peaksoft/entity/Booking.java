@@ -28,4 +28,7 @@ public class Booking {
             CascadeType.PERSIST,
             CascadeType.REFRESH})
     private House house;
+
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private Agency agency;
 }

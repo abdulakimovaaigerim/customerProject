@@ -16,7 +16,7 @@ import peaksoft.repository.BookingRepository;
 public class BookingRepositoryImpl implements BookingRepository {
 
     @PersistenceContext
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     @Override
     public Booking getBookingById(Long bookingId) {

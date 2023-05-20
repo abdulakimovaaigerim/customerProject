@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Customer</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/customers/save}" th:object="${newCustomer}">
+
+    <div>
+        <label for="customerName">Customer Name</label>
+        <input type="text" th:field="*{name}" id="customerName">
+    </div>
+
+    <div>
+        <label for="customerSurname">Customer Surname</label>
+        <input type="text" th:field="*{surname}" id="customerSurname">
+    </div>
+
+    <div>
+        <label for="email">Email</label>
+        <input type="text" th:field="*{email}" id="email">
+    </div>
+
+    <div>
+        <label for="gender">Gender:</label>
+        <select id="gender" th:field="*{gender}">
+            <option value="MALE">Male</option>
+            <option value="FEMALE">Female</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="phoneNumber">PhoneNumber</label>
+        <input type="number" th:field="*{phoneNumber}" id="dateOfBirth">
+    </div>
+
+    <div>
+        <label for="dateOfBirth">DateOfBirth</label>
+        <input type="date" th:field="*{dateOfBirth}" id="phoneNumber">
+    </div>
+
+    <div>
+        <button type="submit">Save Customer</button>
+    </div>
+
+</form>
+<br>
+<p style="text-align: center">
+    <a class="btn btn-outline-primary" role="button" href="/customers/save">Add new Customers</a></p>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+</html>

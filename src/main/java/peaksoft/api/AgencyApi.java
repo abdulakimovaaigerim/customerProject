@@ -16,7 +16,6 @@ public class AgencyApi {
 
     private final AgencyService agencyService;
 
-
     @GetMapping
     public String getAll(Model model) {
         model.addAttribute("allAgencies", agencyService.getAllAgencies());
@@ -52,5 +51,4 @@ public class AgencyApi {
         agencyService.deleteAgencyById(id);
         return "redirect:/agencies";
     }
-
 }
